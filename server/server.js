@@ -75,7 +75,11 @@ return res.status(404).send();
     body.completedAt= new Date().getTime();
 
   }
-  Todo.findByIdAndUpdate(id, {$set:body} ,{new: true}).then((todo)=>{
+  else {
+   body.completed = false;
+   body.completedAt = null;
+ }
+  Todo.findByIdAndUpdate(id, {$set:body} ,{new: true} ).then((todo)=>{
     if(!todo)
     {
       return res.status(400).send();
